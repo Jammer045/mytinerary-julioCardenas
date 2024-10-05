@@ -13,7 +13,7 @@ const HeroSection = () => {
         <p className="text-xl mb-8 text-center max-w-2xl">
           "Find your perfect trip, designed by insiders who know and love their cities!"
         </p>
-        <button className="bg-white text-gray-800 px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition duration-300">
+        <button className="bg-white text-gray-800 px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-200 transition duration-300">
           Explore now!
         </button>
       </div>
