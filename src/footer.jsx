@@ -1,11 +1,12 @@
 import React from 'react';
-import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { Facebook, Instagram, X } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="bg-blue-900 text-white py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
           {/* Navigation Links */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Navigation</h3>
@@ -35,7 +36,7 @@ const Footer = () => {
                 <Instagram size={24} />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
-                <Twitter size={24} />
+                <X size={26} />
               </a>
             </div>
           </div>
