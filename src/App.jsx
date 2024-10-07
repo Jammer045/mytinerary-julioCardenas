@@ -1,9 +1,9 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import HeroSection from './heroSection';
-import Cities from './cities';
+import HeroSection from './Pages/heroSection';
+import Cities from './Pages/cities';
 import Navbar from './NavBar';
-import PopularTineraries from './calltoAction';
+import PopularTineraries from './Pages/calltoAction';
 import Footer from './footer';
 
 const Layout = () => {

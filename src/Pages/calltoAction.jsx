@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import city1 from './assets/Paris.jpg';
-import city2 from './assets/nueva-york.jpg';
-import city3 from './assets/atracciones-turisticas-en-Tokio.jpg';
-import city4 from './assets/Rome.jpg';
-import city5 from './assets/London.jpg';
-import city6 from './assets/Berlin.jpg';
-import city7 from './assets/Sydney.jpg';
-import city8 from './assets/Rio_de_Janeiro.jpg';
-import city9 from './assets/Dubai.jpg';
-import city10 from './assets/jordaan-amsterdam.jpg';
-import city11 from './assets/Prague.jpg';
-import city12 from './assets/Depositphotos_Moscow_s-2019.jpg';
-import backgroundImage from './assets/istockphoto-barca.jpg';
+import city1 from '../assets/Paris.jpg';
+import city2 from '../assets/nueva-york.jpg';
+import city3 from '../assets/atracciones-turisticas-en-Tokio.jpg';
+import city4 from '../assets/Rome.jpg';
+import city5 from '../assets/London.jpg';
+import city6 from '../assets/Berlin.jpg';
+import city7 from '../assets/Sydney.jpg';
+import city8 from '../assets/Rio_de_Janeiro.jpg';
+import city9 from '../assets/Dubai.jpg';
+import city10 from '../assets/jordaan-amsterdam.jpg';
+import city11 from '../assets/Prague.jpg';
+import city12 from '../assets/Depositphotos_Moscow_s-2019.jpg';
+import backgroundImage from '../assets/istockphoto-barca.jpg';
 
 const destinations = [
   { id: 1, title: "Paris", image: city1, likes: 13 },

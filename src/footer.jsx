@@ -3,7 +3,7 @@ import { Facebook, Instagram, X } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-blue-900 text-white py-8">
+    <footer className="bg-blue-900 text-white py-4">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
@@ -13,7 +13,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/" className="hover:text-blue-300">Home</a></li>
               <li><a href="/cities" className="hover:text-blue-300">Cities</a></li>
-              <li><a href="/login" className="hover:text-blue-300">Login</a></li>
+              <li><a href="/" className="hover:text-blue-300">Login</a></li>
             </ul>
           </div>
 
