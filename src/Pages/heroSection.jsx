@@ -4,7 +4,7 @@ import backgroundImage from '../assets/Puerta-del-Cielo_pinal-de-amoles_1_1600.j
 
 const HeroSection = () => {
   return (
-    <div className="relative h-screen">
+    <div className="relative" style={{ height: 'calc(100vh - 4rem)' }}>
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${backgroundImage})` }}
