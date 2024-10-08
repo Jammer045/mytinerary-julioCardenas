@@ -18,7 +18,7 @@ const Cities = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="container mx-auto mt-8 flex-grow">
+      <div className="container mx-auto mt-20 flex-grow">
         <h1 className="text-3xl font-bold mb-4">Explore Cities</h1>
         <input type="text" />
         <div className="relative">

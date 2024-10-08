@@ -4,11 +4,10 @@ import backgroundImage from '../assets/Puerta-del-Cielo_pinal-de-amoles_1_1600.j
 
 const HeroSection = () => {
   return (
-    <div className="relative" style={{ height: 'calc(100vh - 4rem)' }}>
+    <div className="relative h-screen overflow-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      />
+        className="absolute inset-0 bg-cover bg-center animate-zoom"
+        style={{ backgroundImage: `url(${backgroundImage})` }}/>
       <div className="absolute inset-0 bg-black opacity-40" />
       <div className="relative z-10 flex flex-col h-full items-center justify-center text-white px-4">
         <h1 className="text-5xl font-bold mb-4 text-center">My Tineraries</h1>

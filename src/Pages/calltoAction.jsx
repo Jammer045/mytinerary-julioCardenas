@@ -16,18 +16,18 @@ import city12 from '../assets/Depositphotos_Moscow_s-2019.jpg';
 import backgroundImage from '../assets/istockphoto-barca.jpg';
 
 const destinations = [
-  { id: 1, title: "Paris", image: city1, likes: 13 },
-  { id: 2, title: "New York", image: city2, likes: 11 },
-  { id: 3, title: "Tokyo", image: city3, likes: 10 },
-  { id: 4, title: "Rome", image: city4, likes: 8 },
-  { id: 5, title: "London", image: city5, likes: 15 },
-  { id: 6, title: "Berlin", image: city6, likes: 12 },
-  { id: 7, title: "Sydney", image: city7, likes: 9 },
-  { id: 8, title: "Rio de Janeiro", image: city8, likes: 7 },
-  { id: 9, title: "Dubai", image: city9, likes: 14 },
-  { id: 10, title: "Amsterdam", image: city10, likes: 11 },
-  { id: 11, title: "Prague", image: city11, likes: 10 },
-  { id: 12, title: "Moscow", image: city12, likes: 8 },
+  { id: 1, title: "Paris", image: city1, likes: 93 },
+  { id: 2, title: "New York", image: city2, likes: 91 },
+  { id: 3, title: "Tokyo", image: city3, likes: 70 },
+  { id: 4, title: "Rome", image: city4, likes: 78 },
+  { id: 5, title: "London", image: city5, likes: 95 },
+  { id: 6, title: "Berlin", image: city6, likes: 92 },
+  { id: 7, title: "Sydney", image: city7, likes: 89 },
+  { id: 8, title: "Rio de Janeiro", image: city8, likes: 77 },
+  { id: 9, title: "Dubai", image: city9, likes: 95 },
+  { id: 10, title: "Amsterdam", image: city10, likes: 78 },
+  { id: 11, title: "Prague", image: city11, likes: 80 },
+  { id: 12, title: "Moscow", image: city12, likes: 88 },
 ];
 
 const PopularTineraries = () => {
@@ -84,14 +84,15 @@ const PopularTineraries = () => {
         <div className="md:w-2/3 relative overflow-hidden">
           <div
             className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
             {[...Array(destinations.length / 4)].map((_, slideIndex) => (
               <div key={slideIndex} className="w-full flex-shrink-0">
                 <div className="grid grid-cols-2 gap-4">
                   {getSlideDestinations(slideIndex).map((dest) => (
-                    <div key={dest.id} className="relative rounded-lg overflow-hidden shadow-md">
-                      <img src={dest.image} alt={dest.title} className="w-full h-48 object-cover" />
+                    <div key={dest.id} className="relative rounded-lg overflow-hidden shadow-md group">
+                      <div className="w-full h-48 overflow-hidden">
+                        <img src={dest.image} alt={dest.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"/>
+                      </div>
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-2">
                         <h4 className="text-white text-lg font-semibold">{dest.title}</h4>
                       </div>
