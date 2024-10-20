@@ -13,6 +13,10 @@ import city9 from '../assets/Dubai.jpg';
 import city10 from '../assets/jordaan-amsterdam.jpg';
 import city11 from '../assets/Prague.jpg';
 import city12 from '../assets/Depositphotos_Moscow_s-2019.jpg';
+import city13 from '../assets/que-visitar-en-barcelona-1.jpg';
+import city14 from '../assets/image-madrid.jpg';
+import city15 from '../assets/5fa5393804286.r_d.499-319-0.jpeg';
+import city16 from '../assets/Vivir-en-Ibiza_03.jpg';
 import backgroundImage from '../assets/istockphoto-barca.jpg';
 
 const destinations = [
@@ -28,6 +32,10 @@ const destinations = [
   { id: 10, title: "Amsterdam", image: city10, likes: 78 },
   { id: 11, title: "Prague", image: city11, likes: 80 },
   { id: 12, title: "Moscow", image: city12, likes: 88 },
+  { id: 13, title: "Barcelona", image: city13, likes: 93 },
+  { id: 14, title: "Madrid", image: city14, likes: 91 },
+  { id: 15, title: "Istanbul", image: city15, likes: 70 },
+  { id: 16, title: "Ibiza", image: city16, likes: 78 },
 ];
 
 const PopularTineraries = () => {
