@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import HeroSection from './Pages/heroSection';
 import Cities from './Pages/cities';
+import CityPage from './Pages/cityDetail.jsx';
 import Navbar from './NavBar';
 import PopularTineraries from './Pages/calltoAction';
 import Footer from './footer';
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         path: 'cities',
         element: <Cities />,
       },
+      {
+        path: 'city/:id',
+        element: <CityPage />,
+      }
     ],
   },
 ]);
