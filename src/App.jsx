@@ -8,6 +8,7 @@ import PopularTineraries from './Pages/calltoAction';
 import Footer from './footer';
 import { Provider } from 'react-redux';
 import { store } from './Redux/store.js';
+import Activities from './Pages/activitiesPage.jsx';
 
 const Layout = () => {
   return (
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: 'city/:id',
         element: <CityPage />,
+      },
+      {
+        path: '/activities/:id',
+        element: <Activities />,
       }
     ],
   },
