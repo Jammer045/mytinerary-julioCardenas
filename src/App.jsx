@@ -6,6 +6,8 @@ import CityPage from './Pages/cityDetail.jsx';
 import Navbar from './NavBar';
 import PopularTineraries from './Pages/calltoAction';
 import Footer from './footer';
+import { Provider } from 'react-redux';
+import { store } from './Redux/store.js';
 
 const Layout = () => {
   return (
@@ -48,7 +50,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;

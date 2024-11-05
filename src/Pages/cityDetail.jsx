@@ -1,34 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import CityDetail from '../components/detailComponent.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCityById, clearCurrentCity } from '../Redux/citiesSlice';
+import CityDetail from '../components/detailComponent';
 import Footer from '../footer';
 
 const CityPage = () => {
   const { id } = useParams();
-  const [city, setCity] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  
+  // Obtenemos el estado de Redux
+  const { currentCity, loading, error } = useSelector(state => state.cities);
 
   useEffect(() => {
-    const fetchCity = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(`http://localhost:8080/api/cities/${id}`);
-        if (!response.ok) {
-          throw new Error('City not found');
-        }
-        const data = await response.json();
-        setCity(data.response);
-      } catch (err) {
-        console.error('Error fetching city:', err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (id) {
+      dispatch(fetchCityById(id));
+    }
 
-    fetchCity();
-  }, [id]);
+    // Limpieza al desmontar
+    return () => {
+      dispatch(clearCurrentCity());
+    };
+  }, [dispatch, id]);
 
   if (loading) {
     return (
@@ -49,7 +42,7 @@ const CityPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">
-        <CityDetail city={city} />
+        <CityDetail city={currentCity} />
       </div>
       <Footer />
     </div>
