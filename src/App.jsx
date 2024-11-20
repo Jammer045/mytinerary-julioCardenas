@@ -9,6 +9,8 @@ import Footer from './footer';
 import { Provider } from 'react-redux';
 import { store } from './Redux/store.js';
 import Activities from './Pages/activitiesPage.jsx';
+import SignIn from './components/siginComponent.jsx';
+import SignUp from './components/signUpComponent.jsx';
 
 const Layout = () => {
   return (
@@ -49,7 +51,15 @@ const router = createBrowserRouter([
       {
         path: '/activities/:id',
         element: <Activities />,
-      }
+      },
+      {
+        path: '/signin',
+        element: <SignIn />,
+      },
+      {
+        path: '/signup',
+        element: <SignUp />,
+      },
     ],
   },
 ]);

@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogout } from './Redux/authSlice';
 import logo from "./assets/Gemini_Generated_Image_3r8qnn3r8qnn3r8q.jpeg";
 import defaultUserPhoto from "./assets/usuario-sin-foto.png";
-import userPhoto from "./assets/usuario-sin-foto-2.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  // Obtenemos el estado de auth desde Redux
+  const { user, token } = useSelector(state => state.auth);
+  const isLoggedIn = !!token; // Si hay token, está logueado
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUser(null);
+  const handleLogout = async () => {
+    await dispatch(userLogout());
+    navigate('/');
   };
 
   const handleLogin = () => {
-    setIsLoggedIn(true);
-    setUser({ name: "Johnny Depp", photo: userPhoto });
+    navigate('/signin');
   };
 
   const handleLogoClick = (e) => {
@@ -34,21 +37,27 @@ const Navbar = () => {
           <span className="text-2xl font-bold">My Tinerary</span>
         </a>
 
-        {/* Boton de Login y menu hamburguesa */}
-        <div className="flex items-center space-x-4">{!isLoggedIn && (
-            <img src={defaultUserPhoto} alt="" className="h-8 w-8 rounded-full"/>)}
+        {/* Botón de Login y menu hamburguesa */}
+        <div className="flex items-center space-x-4">
+          {!isLoggedIn && (
+            <img src={defaultUserPhoto} alt="" className="h-8 w-8 rounded-full"/>
+          )}
           {isLoggedIn ? (
             <div className="flex items-center space-x-2">
-              <img src={user.photo} alt={user.name} className="h-8 w-8 rounded-full"/>
-              <span className="hidden md:inline">{user.name}</span>
-              <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition duration-300">
+              <img src={user?.photo} alt={user?.name} className="h-8 w-8 rounded-full"/>
+              <span className="hidden md:inline">{user?.name}</span>
+              <button 
+                onClick={handleLogout} 
+                className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition duration-300"
+              >
                 Logout
               </button>
             </div>
           ) : (
             <button
               onClick={handleLogin}
-              className="bg-white text-blue-600 px-4 py-1 rounded hover:bg-blue-200 transition duration-300">
+              className="bg-white text-blue-600 px-4 py-1 rounded hover:bg-blue-200 transition duration-300"
+            >
               Login
             </button>
           )}
@@ -69,10 +78,18 @@ const Navbar = () => {
             </svg>
           </button>
           <div className="flex flex-col space-y-4">
-            <Link to="/" className="hover:bg-blue-700 px-4 py-2 rounded transition duration-300" onClick={() => setIsOpen(false)}>
+            <Link 
+              to="/" 
+              className="hover:bg-blue-700 px-4 py-2 rounded transition duration-300" 
+              onClick={() => setIsOpen(false)}
+            >
               Home
             </Link>
-            <Link to="/cities" className="hover:bg-blue-700 px-4 py-2 rounded transition duration-300" onClick={() => setIsOpen(false)}>
+            <Link 
+              to="/cities" 
+              className="hover:bg-blue-700 px-4 py-2 rounded transition duration-300" 
+              onClick={() => setIsOpen(false)}
+            >
               Cities
             </Link>
 
@@ -80,22 +97,28 @@ const Navbar = () => {
             {isLoggedIn ? (
               <div className="flex flex-col items-start space-y-2">
                 <div className="flex items-center space-x-2">
-                  <img src={user.photo} alt={user.name} className="h-8 w-8 rounded-full"/>
-                  <span>{user.name}</span>
+                  <img src={user?.photo} alt={user?.name} className="h-8 w-8 rounded-full"/>
+                  <span>{user?.name}</span>
                 </div>
-                <button onClick={() => {
+                <button 
+                  onClick={() => {
                     handleLogout();
-                    setIsOpen(false);}}
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300 w-full">
-                    Logout
+                    setIsOpen(false);
+                  }}
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300 w-full"
+                >
+                  Logout
                 </button>
               </div>
             ) : (
-              <button onClick={() => {
+              <button 
+                onClick={() => {
                   handleLogin();
-                  setIsOpen(false);}}
-                  className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-blue-200 transition duration-300 w-full">
-                  Login
+                  setIsOpen(false);
+                }}
+                className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-blue-200 transition duration-300 w-full"
+              >
+                Login
               </button>
             )}
           </div>

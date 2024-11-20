@@ -13,7 +13,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/" className="hover:text-blue-300">Home</a></li>
               <li><a href="/cities" className="hover:text-blue-300">Cities</a></li>
-              <li><a href="/" className="hover:text-blue-300">Login</a></li>
+              <li><a href="/signin" className="hover:text-blue-300">Login</a></li>
             </ul>
           </div>
 
