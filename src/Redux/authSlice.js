@@ -33,6 +33,10 @@ const authSlice = createSlice({
             state.token = null;
             state.error = null;
             localStorage.removeItem('token');
+        },
+        setUser: (state, action) => {
+            state.user = action.payload.user;
+            state.token = action.payload.token;
         }
     }
 });
@@ -62,6 +66,20 @@ export const userLogin = (credentials) => async (dispatch) => {
     }
 };
 
+export const loginWithToken = async (token) => {
+    try {
+        const response = await axios.get('http://localhost:8080/api/auth/verify-token', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data.response.user;
+    } catch (error) {
+        console.log("Error:", error);
+        throw error;
+    }
+};
+
 // Nos traemos la logica del logout del backend
 export const userLogout = () => async (dispatch, getState) => {
     try {
@@ -77,6 +95,67 @@ export const userLogout = () => async (dispatch, getState) => {
         console.error("Logout error:", error);
         dispatch(logoutSuccess());
         return false;
+    }
+};
+
+export const googleLogin = (googleData) => async (dispatch) => {
+    try {
+        dispatch(startLoading());
+        const response = await axios.post('http://localhost:8080/api/auth/google', googleData);
+        
+        if (response.data.success) {
+            const { token, user } = response.data.response;
+            localStorage.setItem('token', token);
+            dispatch(loginSuccess({ token, user }));
+            return true;
+        }
+        dispatch(loginFail(response.data.message));
+        return false;
+    } catch (error) {
+        dispatch(loginFail(error.response?.data?.message || "Google login failed"));
+        return false;
+    }
+};
+
+export const userSignUp = (userData) => async (dispatch) => {
+    try {
+        dispatch(startLoading());
+        const response = await axios.post('http://localhost:8080/api/users/create', userData);
+        
+        if (response.data.success) {
+            return true;
+        }
+        dispatch(loginFail(response.data.message));
+        return false;
+    } catch (error) {
+        dispatch(loginFail(error.response?.data?.message || "Registration failed"));
+        return false;
+    }
+};
+
+export const checkAuthStatus = () => async (dispatch) => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    try {
+        const response = await axios.get('http://localhost:8080/api/auth/verify-token', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        if (response.data.success && response.data.response.user) {
+            dispatch(loginSuccess({
+                token,
+                user: response.data.response.user
+            }));
+        } else {
+            localStorage.removeItem('token');
+            dispatch(logoutSuccess());
+        }
+    } catch (error) {
+        localStorage.removeItem('token');
+        dispatch(logoutSuccess());
     }
 };
 

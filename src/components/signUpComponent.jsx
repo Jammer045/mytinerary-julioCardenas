@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { FcGoogle } from 'react-icons/fc';
+import { Link, useNavigate } from 'react-router-dom';
+import { userSignUp, googleLogin } from '../Redux/authSlice';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignUp = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [countries, setCountries] = useState([]); // Estado para los países
     const [loading, setLoading] = useState(true); // Estado para manejar la carga
     const [error, setError] = useState(null); // Estado para manejar errores
@@ -49,13 +53,23 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aquí irá la acción de Redux para el registro
-        console.log('Form submitted:', formData);
+        const success = await dispatch(userSignUp(formData));
+        if (success) {
+            navigate('/signin');
+        }
     };
 
-    const handleGoogleSignUp = () => {
-        // Aquí irá la acción de Redux para el registro con Google
-        console.log('Google sign up clicked');
+    const handleGoogleSignUp = async (credentialResponse) => {
+        const decoded = jwtDecode(credentialResponse.credential);
+        const googleData = {
+            email: decoded.email,
+            name: decoded.name,
+            photo: decoded.picture
+        };
+        const success = await dispatch(googleLogin(googleData));
+        if (success) {
+            navigate('/');
+        }
     };
 
     if (loading) {
@@ -204,14 +218,11 @@ const SignUp = () => {
                     </div>
 
                     <div className="mt-6">
-                        <button
-                            onClick={handleGoogleSignUp}
-                            className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            <FcGoogle className="h-5 w-5 mr-2" />
-                            Sign up with Google
-                        </button>
-                    </div>
+    <GoogleLogin
+        onSuccess={handleGoogleSignUp}
+        onError={() => console.log('Sign up Failed')}
+    />
+</div>
                 </div>
             </div>
         </div>
