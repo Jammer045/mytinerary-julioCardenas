@@ -14,7 +14,7 @@ import SignUp from './components/signUpComponent.jsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { loginWithToken } from './Redux/authSlice.js';
+import { checkAuthStatus } from './Redux/authSlice.js';
 
 const Layout = () => {
   return (
@@ -71,13 +71,9 @@ const AppContent = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      loginWithToken(token).then((user) => {
-        dispatch(setUser({ user, token }));
-      });
-    }
-  }, []);
+    // Usar checkAuthStatus en lugar de loginWithToken
+    dispatch(checkAuthStatus());
+  }, [dispatch]); // Añadir dispatch como dependencia
 
   return <RouterProvider router={router} />;
 }

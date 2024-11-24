@@ -41,7 +41,7 @@ const authSlice = createSlice({
     }
 });
 
-export const { startLoading, loginSuccess, loginFail, logoutSuccess } = authSlice.actions;
+export const { startLoading, loginSuccess, loginFail, logoutSuccess, setUser } = authSlice.actions;
 
 // Nos traemos la logica del login del backend
 export const userLogin = (credentials) => async (dispatch) => {
