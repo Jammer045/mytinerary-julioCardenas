@@ -38,7 +38,14 @@ Este proyecto es un sitio web de viajes desarrollado con React y potenciado con 
    ```
 3. Instala las dependencias:
    ```
-   npm install
+   npm install @react-oauth/google
+   npm install @reduxjs/toolkit
+   npm install axios
+   npm install jwt-decode
+   npm install react-dom
+   npm install react-icons
+   npm install react-redux
+   npm install react-router-dom
    ```
 
 ## Instalacion de Lucide-React (en caso de ser necesario)
