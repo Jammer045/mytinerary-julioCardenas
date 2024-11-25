@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
-import ItineraryCard from './cardItineraryComponent';
+import React, { useEffect, useState } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import ItineraryCard from "./cardItineraryComponent";
 
 const CityDetail = () => {
   const navigate = useNavigate();
   const [itineraries, setItineraries] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  const { currentCity } = useSelector(state => state.cities);
+
+  const { currentCity } = useSelector((state) => state.cities);
 
   useEffect(() => {
     const fetchItineraries = async () => {
       try {
         if (currentCity?._id) {
-          // URL corregida según tu endpoint
-          const response = await axios.get(`http://localhost:8080/api/cities/city/${currentCity._id}/tineraries`);
+          const response = await axios.get(
+            `http://localhost:8080/api/cities/city/${currentCity._id}/tineraries`
+          );
           setItineraries(response.data.response);
         }
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching itineraries:', error);
+        console.error("Error fetching itineraries:", error);
         setLoading(false);
       }
     };
@@ -42,16 +43,18 @@ const CityDetail = () => {
     <div className="min-h-screen">
       {/* Hero Section with City Info */}
       <div className="relative h-[50vh] mb-8">
-        <div 
+        <div
           className="absolute inset-0 w-full h-full"
           style={{
-            backgroundImage: `url(${currentCity.image || '/placeholder-image.jpg'})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'brightness(0.7)'
+            backgroundImage: `url(${
+              currentCity.image || "/placeholder-image.jpg"
+            })`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            filter: "brightness(0.7)",
           }}
         />
-        
+
         <div className="relative z-10 container mx-auto px-4 py-20">
           <button
             onClick={() => navigate(-1)}
@@ -80,7 +83,9 @@ const CityDetail = () => {
             ))}
           </div>
         ) : (
-          <p className="text-gray-600 text-lg">No itineraries available for this city yet.</p>
+          <p className="text-gray-600 text-lg">
+            No itineraries available for this city yet.
+          </p>
         )}
       </div>
     </div>
